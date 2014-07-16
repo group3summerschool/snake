@@ -142,7 +142,7 @@ food = {
   size: null,
   x: null,
   y: null,
-  color: '#0FF',
+  color: '#FF0000',
   
   set: function() {
     food.size = snake.size;
