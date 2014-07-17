@@ -27,3 +27,96 @@
 <script type="text/javascript" src="game.js"></script>
 </body>
 </html>
+
+<html>
+<head>
+<title>Comments</title>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="json2.js"></script>
+<script>
+
+var arrComment = []; 
+
+
+function objCom(name,email,comment){
+	this.name = name;
+	this.email = email;
+	this.comment = comment
+};
+
+function SetComments() {
+	var myJsonString = JSON.stringify(arrComment);
+	localStorage.Comment = myJsonString;
+}
+
+function RetrieveComments() {
+
+	var RawData = localStorage.Comment;
+	if (RawData != null) {
+		var CommentsStored = JSON.parse(RawData);
+		arrComment = [];
+		$.each(CommentsStored, function(i, obj) {
+		arrComment.push( new objCom(obj.name, obj.email ,obj.comment) );
+});
+}
+}
+
+function AddComment() {
+	RetrieveComments();
+	var name = $('#name').val();
+	var email = $('#email').val();
+	var comment = $('#comment').val();
+	arrComment.push( new objCom(name,email,comment) );
+	console.log(arrComment);
+	SetComments();
+	ShowComment();
+}
+
+
+function ShowComment() {
+	RetrieveComments();
+	$('#array_contents').html('Comment:');
+	$.each(arrComment, function(i, obj) {
+	$('#array_contents').append('<br/>' + obj.name + ' \n ' + obj.email + ' \n ' + obj.comment);
+  });
+}
+
+function ClearLocalStorage() {
+	localStorage.clear();
+	arrComment = [];
+}
+
+function autoResize(e) {
+    var ele = e.target;
+    var t = ele.scrollTop;
+    ele.scrollTop = 0
+    console.log(ele)
+    if (t > 0) {
+        //ele.style.overflowY = "hidden";
+        ele.style.height = (ele.offsetHeight + t + t) + "px";
+    }
+
+
+}
+</script>
+</head>
+
+<body>
+<hr>
+
+<h1>Comments</h1>
+
+<input type="button" value="Show Comments" onclick="ShowComment();" />
+<input type="button" value="Clear" onclick="ClearLocalStorage();" />
+<hr>
+
+<br />Name   : <input type="text" name="name" id="name" value="" />
+<br />Email  : <input type="text" name="email" id="email" value="" />
+<br />Comment: <textarea onkeydown="autoResize(event)"name="comment" id="comment" value=""> </textarea>
+
+
+<br /><input type="button" value="Add" onclick="AddComment();" />
+<div id="array_contents"></div>
+</body>
+</html>
+
