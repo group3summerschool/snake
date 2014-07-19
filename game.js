@@ -20,7 +20,7 @@ game = {
   
   stop: function() {
     game.over = true;
-    game.message = 'GAME OVER - PRESS SPACEBAR';
+    game.message = 'Your score: '+game.score+' - PRESS SPACEBAR';
   },
   
   drawBox: function(x, y, size, color) {
