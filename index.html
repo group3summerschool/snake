@@ -1,122 +1,89 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8" />
-<title>HTML5 snake - Canvas Snake Game Group 3</title>
-<!--[if IE]>
-<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-<link rel="stylesheet" href="page.css" type="text/css">
-</head>
-<body>
 
-<h1>html5-snake</h1>
-<p><a href="http://en.wikipedia.org/wiki/HTML5">HTML5</a> variation of the classic <a href="http://en.wikipedia.org/wiki/Snake_(video_game)">snake game</a>.</p>
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Snake : " />
 
-<div>
-  <canvas id="the-game" width="800" height="600">
-</div>
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-<p>Control snake with arrow keys, WASD, or HJKL (vim keys).</p>
+    <title>Snake</title>
+  </head>
 
-<p>New food may appear under snake, uncoil to reveal.</p>
+  <body>
 
-<p>Collect the food to grow and increase speed.</p>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/group3summerschool/snake">View on GitHub</a>
 
-<p>&copy; 2013 - <a href="http://JDStraughan.com">JDStraughan.com</a> - <a href="https://github.com/JDStraughan/html5-snake">Source on GitHub</a></p>  
-<script type="text/javascript" src="game.js"></script>
-</body>
+          <h1 id="project_title">Snake</h1>
+          <h2 id="project_tagline"></h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/group3summerschool/snake/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/group3summerschool/snake/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="html5-snake" class="anchor" href="#html5-snake"><span class="octicon octicon-link"></span></a>html5-snake</h1>
+
+<p>Okay, so I'm up to 2 games in my repertoire. </p>
+
+<p>The last game, <a href="https://github.com/JDStraughan/html5-lightcycles">lightcycles</a>, was a great learning experience, and I tried to apply some of the lessons learned there to this game.</p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>It's just HTML, CSS, and javascript.  Open it in a modern browser and have fun.</p>
+
+<p>Too lazy to download?  <a href="http://jsfiddle.net/zT7V4/1/">Play it on jsfiddle (may be older version of game)</a>.</p>
+
+<h2>
+<a name="inspiration" class="anchor" href="#inspiration"><span class="octicon octicon-link"></span></a>Inspiration</h2>
+
+<p><a href="https://github.com/JDStraughan/html5-lightcycles">lightcycles</a> was a blast to write, and it really made me think about how to make my snake move (hehe).  I decided on making and array, and just shift()ing and push()ing segments.  This is what I ended up with.</p>
+
+<h2>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>You can fork/fix/add/pull request this repo, and I'll gladly add your code ;)</p>
+
+<h2>
+<a name="contributors" class="anchor" href="#contributors"><span class="octicon octicon-link"></span></a>Contributors</h2>
+
+<p>If you issue a pull request, add your name here!</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>MIT License - <a href="http://opensource.org/licenses/MIT">http://opensource.org/licenses/MIT</a></p>
+
+<p>Copyright (c) 2013 Jason D. Straughan</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Snake maintained by <a href="https://github.com/group3summerschool">group3summerschool</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
 </html>
-
-<html>
-<head>
-<title>Comments</title>
-<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="json2.js"></script>
-<script>
-
-var arrComment = []; 
-
-
-function objCom(name,email,comment){
-	this.name = name;
-	this.email = email;
-	this.comment = comment
-};
-
-function SetComments() {
-	var myJsonString = JSON.stringify(arrComment);
-	localStorage.Comment = myJsonString;
-}
-
-function RetrieveComments() {
-
-	var RawData = localStorage.Comment;
-	if (RawData != null) {
-		var CommentsStored = JSON.parse(RawData);
-		arrComment = [];
-		$.each(CommentsStored, function(i, obj) {
-		arrComment.push( new objCom(obj.name, obj.email ,obj.comment) );
-});
-}
-}
-
-function AddComment() {
-	RetrieveComments();
-	var name = $('#name').val();
-	var email = $('#email').val();
-	var comment = $('#comment').val();
-	arrComment.push( new objCom(name,email,comment) );
-	console.log(arrComment);
-	SetComments();
-	ShowComment();
-}
-
-
-function ShowComment() {
-	RetrieveComments();
-	$('#array_contents').html('Comment:');
-	$.each(arrComment, function(i, obj) {
-	$('#array_contents').append('<br/>' + obj.name + ' \n ' + obj.email + ' \n ' + obj.comment);
-  });
-}
-
-function ClearLocalStorage() {
-	localStorage.clear();
-	arrComment = [];
-}
-
-function autoResize(e) {
-    var ele = e.target;
-    var t = ele.scrollTop;
-    ele.scrollTop = 0
-    console.log(ele)
-    if (t > 0) {
-        //ele.style.overflowY = "hidden";
-        ele.style.height = (ele.offsetHeight + t + t) + "px";
-    }
-
-
-}
-</script>
-</head>
-
-<body>
-<hr>
-
-<h1>Comments</h1>
-
-<input type="button" value="Show Comments" onclick="ShowComment();" />
-<input type="button" value="Clear" onclick="ClearLocalStorage();" />
-<hr>
-
-<br />Name   : <input type="text" name="name" id="name" value="" />
-<br />Email  : <input type="text" name="email" id="email" value="" />
-<br />Comment: <textarea onkeydown="autoResize(event)"name="comment" id="comment" value=""> </textarea>
-
-
-<br /><input type="button" value="Add" onclick="AddComment();" />
-<div id="array_contents"></div>
-</body>
-</html>
-
